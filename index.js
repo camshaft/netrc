@@ -14,7 +14,7 @@ var fs = require("fs")
 module.exports = exports = function(file) {
   var file = file || join(process.env.HOME, ".netrc");
 
-  if(!fs.existsSync(file)) return;
+  if(!fs.existsSync(file)) return {};
   var netrc = fs.readFileSync(file, "UTF-8");
   return exports.parse(netrc);
 };
