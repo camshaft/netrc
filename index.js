@@ -40,6 +40,11 @@ exports.parse = function(content) {
     , m = null
     , key = null;
 
+  //if first index in array is empty string, strip it off (happens when first line of file is comment. Breaks the parsing)
+  if (tokens[0] === "") {
+    tokens.shift();
+  }
+
   for(var i = 0; i < tokens.length; i+=2) {
     var key = tokens[i]
       , value = tokens[i+1];
