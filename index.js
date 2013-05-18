@@ -66,3 +66,25 @@ exports.parse = function(content) {
 
   return machines
 };
+
+/**
+ * Generate contents of netrc file from objects.
+ * @param {Object} machines as returned by `netrc.parse`
+ * @return {String} text of the netrc file
+ */
+exports.unparse = function(machines){
+    var lines = [],
+        keys = Object.getOwnPropertyNames(machines).sort();
+    keys.forEach(function(key){
+        lines.push('machine ' + key);
+        var machine = machines[key];
+        var attrs = Object.getOwnPropertyNames(machine).sort();
+        attrs.forEach(function(attr){
+            if(typeof(machine[attr]) === 'string'){
+                lines.push('    ' + attr + ' ' + machine[attr]);
+            }
+        });
+    });
+    return lines.join('\n');
+};
+
