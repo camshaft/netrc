@@ -67,4 +67,23 @@ describe("netrc", function() {
     });
   });
 
+  describe('unparse', function(){
+     it('should generate text that parses to the original', function(){
+         var machines = netrc.parse(valid);
+
+         var text = netrc.unparse(machines);
+         should.exist(text);
+         text.should.include('machine github.com');
+         text.should.include('login CamShaft');
+         text.should.include('password 123');
+
+         var parsed = netrc.parse(text);
+         parsed.should.have.property('github.com');
+         parsed["github.com"].should.have.property("login");
+         parsed["github.com"].login.should.eql("CamShaft");
+         parsed["github.com"].should.have.property("password");
+         parsed["github.com"].password.should.eql("123");
+     });
+  });
+
 });
