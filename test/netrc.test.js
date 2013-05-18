@@ -67,11 +67,11 @@ describe("netrc", function() {
     });
   });
 
-  describe('unparse', function(){
+  describe('format', function(){
      it('should generate text that parses to the original', function(){
          var machines = netrc.parse(valid);
 
-         var text = netrc.unparse(machines);
+         var text = netrc.format(machines);
          should.exist(text);
          text.should.include('machine github.com');
          text.should.include('login CamShaft');

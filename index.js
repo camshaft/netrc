@@ -72,7 +72,7 @@ exports.parse = function(content) {
  * @param {Object} machines as returned by `netrc.parse`
  * @return {String} text of the netrc file
  */
-exports.unparse = function(machines){
+exports.format = function format(machines){
     var lines = [],
         keys = Object.getOwnPropertyNames(machines).sort();
     keys.forEach(function(key){
