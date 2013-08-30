@@ -12,10 +12,12 @@ var fs = require("fs")
  * @api public
  */
 module.exports = exports = function(file) {
-  var home = process.env.HOME || process.env.HOMEPATH
-    , file = file || join(home, ".netrc");
+  var home = process.env.HOME || process.env.HOMEPATH;
+  
+  if(!file && !home) return {};
+  file = file || join(home, ".netrc");
 
-  if(!fs.existsSync(file)) return {};
+  if(!file || !fs.existsSync(file)) return {};
   var netrc = fs.readFileSync(file, "UTF-8");
   return exports.parse(netrc);
 };
