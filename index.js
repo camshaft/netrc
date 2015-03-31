@@ -12,11 +12,10 @@ var fs = require("fs")
  * @api public
  */
 module.exports = exports = function(file) {
-  var home = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE
-    , platform = require('os').platform();
+  var home = process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
   
   if(!file && !home) return {};
-  file = file || join(home, (platform == "win32"?"_netrc":".netrc"));
+  file = file || join(home, (/^win/.test(process.platform)?"_netrc":".netrc"));
 
   if(!file || !fs.existsSync(file)) return {};
   var netrc = fs.readFileSync(file, "UTF-8");
