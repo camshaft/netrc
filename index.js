@@ -12,7 +12,7 @@ var fs = require("fs")
  * @api public
  */
 module.exports = exports = function(file) {
-  var home = process.env.HOME || process.env.HOMEPATH;
+  var home = getHomePath();
   
   if(!file && !home) return {};
   file = file || join(home, ".netrc");
@@ -90,3 +90,25 @@ exports.format = function format(machines){
     return lines.join('\n');
 };
 
+/**
+ * Serialise contents objects to netrc file.
+ *
+ * @param {Object} machines as returned by `netrc.parse`
+ * @api public
+ */
+exports.save = function save(machines){
+  var home = getHomePath();
+  var destFile = join(home, ".netrc");
+  var data = exports.format(machines) + "\n";
+  fs.writeFileSync(destFile, data);
+};
+
+/**
+ * Get the home path
+ *
+ * @return {String} path to home directory
+ * @api private
+ */
+function getHomePath() {
+  return process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+}
