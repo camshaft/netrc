@@ -102,7 +102,7 @@ exports.save = function save(machines){
   var home = getHomePath();
   var destFile = join(home, '.netrc');
   var data = exports.format(machines) + '\n';
-  fs.writeFileSync(destFile, data);
+  fs.writeFileSync(destFile, data, {mode: 0o600});
 };
 
 /**
