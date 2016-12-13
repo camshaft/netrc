@@ -63,6 +63,7 @@ exports.parse = function(content) {
     }
     // key=value
     else {
+      m = {};
       m[key] = value;
     }
   }
