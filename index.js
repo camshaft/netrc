@@ -113,5 +113,5 @@ exports.save = function save(machines){
  */
 
 function getHomePath() {
-  return process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+  return process.env.NETRC || process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
 }
